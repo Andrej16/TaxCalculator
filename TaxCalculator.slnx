@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/SolutionItems/">
+    <File Path=".gitignore" />
+    <File Path="README.md" />
+  </Folder>
   <Project Path="TaxCalculator.API/TaxCalculator.API.csproj" Id="be8a3299-a6d6-4160-a383-7d302627e330" />
   <Project Path="TaxCalculator.Application/TaxCalculator.Application.csproj" Id="46e78680-7215-4493-9daf-99423160e1e4" />
   <Project Path="TaxCalculator.Domain/TaxCalculator.Domain.csproj" Id="9d22631e-45a1-4640-a805-a99f290e9697" />
