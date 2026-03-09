@@ -1,7 +1,6 @@
 <Solution>
   <Folder Name="/SolutionItems/">
     <File Path=".gitignore" />
-    <File Path="Owerview.md" />
     <File Path="README.md" />
   </Folder>
   <Project Path="TaxCalculator.API/TaxCalculator.API.csproj" Id="be8a3299-a6d6-4160-a383-7d302627e330" />
