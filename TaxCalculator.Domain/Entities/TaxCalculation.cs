@@ -29,6 +29,11 @@ public class TaxCalculation : Entity
             throw new ArgumentException("At least one tax band must be provided.", nameof(bands));
         }
 
+        if (grossAnnualSalary < 0)
+        {
+            throw new ArgumentException("Gross annual salary cannot be negative.", nameof(grossAnnualSalary));
+        }
+
         var calculation = new TaxCalculation();
         var annualPaidTax = 0d;
 

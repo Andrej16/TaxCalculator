@@ -21,7 +21,7 @@ public class CalculateTaxEndpoint
 		}
 		catch (Exception ex)
 		{
-			return TypedResults.Problem(ex.Message, statusCode: StatusCodes.Status500InternalServerError);
+			return TypedResults.Problem(ex.Message, statusCode: StatusCodes.Status400BadRequest);
         }
     }
 }

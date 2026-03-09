@@ -55,6 +55,28 @@ public sealed class TaxCalculationTests
         Assert.AreEqual(expectedAnnualTaxPaid / 12, result.MonthlyTaxPaid);
     }
 
+    [TestMethod]
+    public void Calculate_NegativeGrossAnnualSalary_ThrowsArgumentException()
+    {
+        // Arrange
+        double grossAnnualSalary = -50000d;
+        var bands = new List<TaxBandType>
+        {
+            CreateTaxBandType("Band 1", 0, 5000, 0),
+            CreateTaxBandType("Band 2", 5000, 20000, 20),
+            CreateTaxBandType("Band 3", 20000, int.MaxValue, 40)
+        };
+
+        // Act
+        var action = () => TaxCalculation.Calculate(grossAnnualSalary, bands);
+
+        // Assert
+        Assert.ThrowsExactly<ArgumentException>(
+            action, 
+            "Gross annual salary cannot be negative.", 
+            "Expected ArgumentException to be thrown when grossAnnualSalary is negative.");
+    }
+
     private static TaxBandType CreateTaxBandType(string name, int minRange, int maxRange, int taxRate)
     {
         Type objectType = typeof(TaxBandType);
