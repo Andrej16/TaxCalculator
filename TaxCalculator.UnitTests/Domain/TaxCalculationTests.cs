@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Reflection;
 using TaxCalculator.Domain.Entities;
+using TaxCalculator.Domain.Exceptions;
 
 namespace TaxCalculator.UnitTests.Domain;
 
@@ -15,18 +16,18 @@ public sealed class TaxCalculationTests
         IEnumerable<TaxBandType> bands = Enumerable.Empty<TaxBandType>();
 
         // Act
-        ArgumentException? ex = null;
+        TaxCalculatorDomainException? ex = null;
         try
         {
             TaxCalculation.Calculate(grossAnnualSalary, bands);
         }
-        catch (ArgumentException e)
+        catch (TaxCalculatorDomainException e)
         {
             ex = e;
         }
 
         // Assert
-        Assert.IsNotNull(ex, "Expected ArgumentException to be thrown when bands is empty.");
+        Assert.IsNotNull(ex, "Expected TaxCalculatorDomainException to be thrown when bands is empty.");
     }
 
     [TestMethod]
@@ -71,7 +72,7 @@ public sealed class TaxCalculationTests
         var action = () => TaxCalculation.Calculate(grossAnnualSalary, bands);
 
         // Assert
-        Assert.ThrowsExactly<ArgumentException>(
+        Assert.ThrowsExactly<TaxCalculatorDomainException>(
             action, 
             "Gross annual salary cannot be negative.", 
             "Expected ArgumentException to be thrown when grossAnnualSalary is negative.");

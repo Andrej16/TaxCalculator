@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 _ = builder.Services
     .RegisterPersistence(builder.Configuration)
-    .AddApplicationServices();
+    .AddApplicationServices()
+    .AddMemoryCache();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using TaxCalculator.Domain.Common;
+using TaxCalculator.Domain.Exceptions;
 
 namespace TaxCalculator.Domain.Entities;
 
@@ -26,12 +27,12 @@ public class TaxCalculation : Entity
     {
         if (!bands.Any()) 
         {
-            throw new ArgumentException("At least one tax band must be provided.", nameof(bands));
+            throw new TaxCalculatorDomainException("At least one tax band must be provided.", nameof(bands));
         }
 
         if (grossAnnualSalary < 0)
         {
-            throw new ArgumentException("Gross annual salary cannot be negative.", nameof(grossAnnualSalary));
+            throw new TaxCalculatorDomainException("Gross annual salary cannot be negative.", nameof(grossAnnualSalary));
         }
 
         var calculation = new TaxCalculation();

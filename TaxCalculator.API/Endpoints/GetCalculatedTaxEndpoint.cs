@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using TaxCalculator.Application.Queries;
 using TaxCalculator.Application.Queries.Dtos;
+using TaxCalculator.Domain.Exceptions;
 
 namespace TaxCalculator.API.Endpoints;
 
@@ -18,9 +19,13 @@ public class GetCalculatedTaxEndpoint
             
             return TypedResults.Ok(result);
         }
-        catch (Exception ex)
+        catch (TaxCalculatorDomainException ex)
         {
             return TypedResults.Problem(ex.Message, statusCode: StatusCodes.Status404NotFound);
+        }
+        catch (Exception ex)
+        {
+            return TypedResults.Problem(ex.Message, statusCode: StatusCodes.Status500InternalServerError);
         }
     }
 }

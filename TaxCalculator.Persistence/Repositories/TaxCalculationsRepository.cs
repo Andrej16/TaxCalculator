@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaxCalculator.Domain.Entities;
+using TaxCalculator.Domain.Exceptions;
 using TaxCalculator.Domain.Repositories;
 using TaxCalculator.Persistence.Context;
 
@@ -13,7 +14,7 @@ public class TaxCalculationsRepository(TaxCalculationContext context) : ITaxCalc
     {
         var dbItem = await _context.TaxCalculations.FindAsync([id], cancellationToken);
 
-        return dbItem ?? throw new InvalidOperationException($"Tax calculation with id {id} not found.");
+        return dbItem ?? throw new TaxCalculatorDomainException($"Tax calculation with id {id} not found.");
     }
 
     public async Task<IReadOnlyList<TaxBandType>> GetAllBandsAsync(CancellationToken cancellationToken)
