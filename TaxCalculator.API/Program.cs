@@ -1,3 +1,5 @@
+using Asp.Versioning;
+using Microsoft.Extensions.Options;
 using TaxCalculator.API.Extensions;
 using TaxCalculator.Application.Extensions;
 using TaxCalculator.Persistence.Extensions;
@@ -10,10 +12,14 @@ _ = builder.Services
     .AddApplicationServices()
     .AddMemoryCache();
 
+builder.Services.AddApiVersioning(options => options.ApiVersionReader = new UrlSegmentApiVersionReader());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.MapOpenApi();
 
-app.RegisterTaxEndpoints(builder.Configuration);
+app.RegisterTaxEndpoints();
+app.RegisterUsersEndpoints();
 
 app.Run();
